@@ -1,1 +1,19 @@
-<p>employees works!</p>
+<div class="ui-g-12" style="padding:10px"><button pButton type="button" label="Refresh data" (click)="refreshEmployeesList()"></button></div>
+<p-table [value]="employees">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-employee>
+        <tr>
+            <td>{{employee.Id}}</td>
+            <td>{{employee.FirstName}}</td>
+            <td>{{employee.LastName}}</td>
+            <td>{{employee.Email}}</td>
+        </tr>
+    </ng-template>
+</p-table>
