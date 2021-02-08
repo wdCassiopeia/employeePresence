@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -7,11 +7,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { 
+  reactiveForm!: FormGroup;
+  constructor(private builder: FormBuilder) { 
   }
 
 
   ngOnInit(): void {
+    this.reactiveForm = this.builder.group({
+      apiAddress: [null, Validators.required],
+      authKey: [null, Validators.required]
+    });
   }
   setToken(apiAddress: string, authKey: string) {
     if (apiAddress && authKey) {
