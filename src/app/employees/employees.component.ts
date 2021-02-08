@@ -20,7 +20,6 @@ export class EmployeesComponent implements OnInit {
       Email: a.Email,
       ReferenceId: a.ReferenceId
     }
-    
   });
 
 

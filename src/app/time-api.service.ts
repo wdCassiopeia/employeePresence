@@ -60,20 +60,4 @@ export class TimeApiService {
     }
     return {};
   }
-
-/*   public async getEmployeesMockData(): Employee[] {
-    let employees = []
-    this.httpClient.get<any[]>('assets/mockEmployees.json').subscribe(
-      result => {
-        employees = result.map((a) => {
-          a.FirstName,
-            a.LastName,
-            a.Email,
-            a.ReferenceId
-        });
-      }
-    )
-    return employees;
-  } */
-
 }
