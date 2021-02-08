@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeApiService } from '../time-api.service';
 import { Employee } from './employees.model';
+import mockEmployees from '../../assets/mockEmployees.json';
 
 @Component({
   selector: 'app-employees',
@@ -11,21 +12,25 @@ export class EmployeesComponent implements OnInit {
 
   constructor(private timeApiService: TimeApiService) { }
 
-  employees: Employee[] = [];
+  employees: Employee[] = mockEmployees.map(a => {
+    return {
+      FirstName: a.FirstName,
+      MiddleName: a.MiddleName,
+      LastName: a.LastName,
+      Email: a.Email,
+      ReferenceId: a.ReferenceId
+    }
+    
+  });
+
 
   ngOnInit(): void {
     this.refreshEmployeesList();
   }
 
   refreshEmployeesList() {
-    this.timeApiService.getEmployees()?.subscribe(e => {
-      this.employees = e.map((a: Employee) => {
-        a.FirstName,
-        a.LastName,
-        a.Email,
-        a.ReferenceId
-      })
-    });
+/*     this should be called, but the api call is not functional yet, so, mock data
+    this.employees = this.timeApiService.getEmployees(); */
   }
 
 }

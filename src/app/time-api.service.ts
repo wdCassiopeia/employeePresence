@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Employee } from './employees/employees.model';
 
 @Injectable({
@@ -10,18 +9,22 @@ export class TimeApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getEmployees(): Observable<any> | undefined {
+  public getEmployees(): Employee[] {
     const apiObject = this.getUrlAndHeader();
-    const httpOptions = {
-      headers: new HttpHeaders({ 
-        'Authorization': localStorage.getItem('spicaToken')!
-      })
-    };
-    if (apiObject.apiUrl && httpOptions) {
-      return this.httpClient.get(`${apiObject.apiUrl}/employee`, apiObject.headers);
+    if (apiObject.apiUrl && apiObject.headers) {
+      this.httpClient.get<any[]>(`${apiObject.apiUrl}/employee`, apiObject.headers).subscribe(
+        result => {
+          return result.map((a) => {
+            a.FirstName,
+              a.LastName,
+              a.Email,
+              a.ReferenceId
+          });
+        }
+      )
     }
-    return;
-  };
+    return [];
+  }
 
   public addEmployee(newEmployee: Employee) {
     const apiObject = this.getUrlAndHeader();
@@ -29,11 +32,15 @@ export class TimeApiService {
       return this.httpClient.put(`${apiObject.apiUrl}/employee`, newEmployee, apiObject.headers);
     }
     return;
-
   }
 
-  public getPresence() {
-
+  public getPresence(organizationalUnitId: string): any[] {
+    const apiObject = this.getUrlAndHeader();
+    const currentTimestamp = new Date().toDateString();
+    if (apiObject.apiUrl && apiObject.headers && organizationalUnitId) {
+      this.httpClient.get<any[]>(`${apiObject.apiUrl}/presence?TimeStamp=${currentTimestamp}&OrgUnitID=${organizationalUnitId}&showInactiveEmployees=false`, apiObject.headers);
+    }
+    return [];
   };
 
   getUrlAndHeader() {
@@ -42,7 +49,7 @@ export class TimeApiService {
     if (spicaToken && url) {
 
       const httpOptions = {
-        headers: new HttpHeaders({ 
+        headers: new HttpHeaders({
           'Authorization': localStorage.getItem('spicaToken')!
         })
       };
@@ -53,5 +60,20 @@ export class TimeApiService {
     }
     return {};
   }
+
+/*   public async getEmployeesMockData(): Employee[] {
+    let employees = []
+    this.httpClient.get<any[]>('assets/mockEmployees.json').subscribe(
+      result => {
+        employees = result.map((a) => {
+          a.FirstName,
+            a.LastName,
+            a.Email,
+            a.ReferenceId
+        });
+      }
+    )
+    return employees;
+  } */
 
 }
