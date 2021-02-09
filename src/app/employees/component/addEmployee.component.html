@@ -1,0 +1,13 @@
+<div class="ui-g ui-fluReferenceId">
+    <form [formGroup]="reactiveForm">
+    <div class="ui-g-12" style="padding:10px"><input #FirstName placeholder="First name" formControlName="FirstName" type="text"
+                pInputText></div>
+    <div class="ui-g-12" style="padding:10px"><input #LastName placeholder="Last name"  formControlName="LastName" type="text" pInputText>
+    </div>
+    <div class="ui-g-12" style="padding:10px"><input #Email placeholder="Email"  formControlName="Email" type="text" pInputText>
+    </div>
+    <div class="ui-g-12" style="padding:10px"><input #ReferenceId  placeholder="Reference Id" formControlName="ReferenceId" type="text" pInputText>
+    </div>
+    <div class="ui-g-12" style="padding:10px; float:right"><button pButton  type="submit" [disabled]="reactiveForm.invalid" label="Submit"
+            (click)="addEmployee(reactiveForm.value)"></button></div></form>
+</div>

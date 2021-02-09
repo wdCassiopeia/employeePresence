@@ -1,33 +1,39 @@
-<div class="ui-g-12" style="padding:10px"><button pButton type="button" label="Refresh data" (click)="refreshEmployeesList()"></button></div>
-<div class="ui-g-12" style="padding:10px">
-      <p-table [value]="employees" [paginator]="true" [rowsPerPageOptions]="[10,25,50]" [rows]="10" dataKey="ReferenceId">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Reference Id</th>
-            </tr>
-            <tr>
-                <th>
-                    <p-columnFilter type="text" field="FirstName"></p-columnFilter>
-                </th>
-                <th>
-                    <p-columnFilter type="text" field="LastName"></p-columnFilter>
-                </th>
-                <th>
-                </th>
-                <th>
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-employee>
-            <tr>
-                <td>{{employee.FirstName}}</td>
-                <td>{{employee.LastName}}</td>
-                <td>{{employee.Email}}</td>
-                <td>{{employee.ReferenceId}}</td>
-            </tr>
-        </ng-template>
-    </p-table>
+<div>
+    <div style="width:80%;display:inline-block;">
+        <p-table [value]="employees" [paginator]="true" [rowsPerPageOptions]="[10,25,50]" [rows]="10"
+            dataKey="ReferenceId">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Reference Id</th>
+                </tr>
+                <tr>
+                    <th>
+                        <p-columnFilter type="text" field="FirstName"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="LastName"></p-columnFilter>
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-employee>
+                <tr>
+                    <td>{{employee.FirstName}}</td>
+                    <td>{{employee.LastName}}</td>
+                    <td>{{employee.Email}}</td>
+                    <td>{{employee.ReferenceId}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div style="width:20%;float:right;">
+        <p-toast [style]="{marginTop: '80px'}"></p-toast>
+        <button type="button" (click)="show()" pButton icon="pi pi-plus" label="Add"></button>
+    </div>
 </div>

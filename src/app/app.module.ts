@@ -13,13 +13,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { AddEmployeeComponent } from './employees/component/addEmployee.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PresenceComponent,
     SettingsComponent,
-    EmployeesComponent
+    EmployeesComponent,
+    AddEmployeeComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
@@ -33,9 +36,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TableModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DynamicDialogModule
   ],
-  providers: [],
+  providers: [DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
